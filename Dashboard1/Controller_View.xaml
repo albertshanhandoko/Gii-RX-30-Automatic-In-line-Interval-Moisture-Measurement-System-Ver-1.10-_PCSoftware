@@ -1,0 +1,476 @@
+﻿<Window x:Class="Dashboard1.Controller_View" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dashboard1"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+        mc:Ignorable="d" Height="670" Width="1124" ResizeMode="CanMinimize" 
+        Title="Controller_View"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="{StaticResource main_page2}"></ImageBrush>
+    </Window.Background>
+
+    <Window.Resources>
+        <Style x:Key="BorderedItem" TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border Name="Border" BorderBrush="Blue" BorderThickness="0.8">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="cellStyle" TargetType="DataGridCell">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Background="Black" BorderThickness="0">
+                            <Border x:Name="border"
+                              BorderBrush="White"
+                              BorderThickness="2"
+                              Background="Black"
+                              CornerRadius="5">
+                                <ContentPresenter />
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="Orange"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="rowStyle" TargetType="DataGridRow">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Black" />
+        </Style>
+        <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#EFF2F8" Offset="0"/>
+            <GradientStop Color="#EFF2F8" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="HeaderBorderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="AliceBlue" Offset="0.614"/>
+            <GradientStop Color="AntiqueWhite" Offset="0.853"/>
+            <GradientStop Color="#FF0AEAFA" Offset="5"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Padding" Value="10,0,0,0"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="MaxHeight" Value="30" />
+
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style x:Key="PDFHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="MaxHeight" Value="30" />
+
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+
+    </Window.Resources>
+    <ScrollViewer>
+        <Grid Height="612">
+            <Grid x:Name="print" Margin="0,0,-17,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="490"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <!-- Historical Section -->
+
+                <Grid Grid.Row="1" Grid.Column="0"  Background="Transparent" >
+
+                    <StackPanel Margin="4,0,4,4" Orientation="Vertical" Background="Transparent">
+                        <TextBlock HorizontalAlignment="Left"  
+                                   TextDecorations="Underline"
+                                   VerticalAlignment="Top" Margin="5,0,0,0" FontSize="18" FontWeight="SemiBold"/>
+
+                        <DataGrid Height="212" Width="auto" 
+                             Margin="0,0,10,0" Padding="0,0,0,0"
+                             x:Name="HistoryGrid1" VerticalAlignment="Top" Background="Transparent"
+                                   ColumnHeaderStyle="{StaticResource PDFHeaderStyle}"
+                                  
+                                  
+                                  >
+
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow" >
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding State}" Value="State1">
+                                            <Setter Property="Background" Value="Red"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding State}" Value="State2">
+                                            <Setter Property="Background" Value="Green"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+
+                        <Button Width="100" Height="25" Margin="5,15,0,5" Padding="3" 
+                                HorizontalAlignment="Left" 
+                      FontSize="14" Background="#264653" 
+                      Foreground="Transparent" FontWeight="Medium"  FontFamily="calibri" Content="Link to Folder" />
+
+
+                    </StackPanel>
+                </Grid>
+
+                <!-- Historical section Finish-->
+
+
+                <!-- PDF section (550) 160 390 -->
+                <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Grid.RowSpan="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="160"/>
+                            <RowDefinition Height="360"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Margin="5,20,4,4" Orientation="Vertical">
+
+                            <!--label -->
+                            <StackPanel Orientation="Horizontal">
+                                <Label Width="90" Height="25" FontSize="11.5" FontWeight="SemiBold">Supplier Name:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_supplier" Width="145" 
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         Background="FloralWhite" 
+                                         Foreground="Black" BorderThickness="1" TextChanged="txt_supplier_TextChanged_1">
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                                <!--
+                                <Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" Background="FloralWhite" 
+                                        Height="25" Margin="0,3,0,5">
+                                    <Border BorderThickness="0 0 1.2 1.2" CornerRadius="0.5" BorderBrush="White" Padding="0.5">
+                                        <TextBox Width="135" Text="" IsEnabled="True" Height="30" 
+                                                 Name="txt_supplier" 
+                                                 Background="Transparent" VerticalAlignment="Center" 
+                                                 TextAlignment="Center" TextChanged="txt_supplier_TextChanged"></TextBox>
+                                    </Border>
+                                </Border>
+                                -->
+                            </StackPanel>
+
+                            <!-- DateTime -->
+                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                <Label Width="90" Height="25" FontWeight="SemiBold">Date/ Time:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_date" Width="145" 
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         Background="FloralWhite" 
+                                         Foreground="Black" BorderThickness="1">
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+
+                            </StackPanel>
+
+                            <!-- Application -->
+                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                <Label Width="90" Height="25" FontWeight="SemiBold">Application:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_application" Width="145" Height="25"
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         Background="FloralWhite" 
+                                         Foreground="Black" BorderThickness="1">
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+
+                            </StackPanel>
+                            <!-- Printed by -->
+                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0" >
+                                <Label Width="90" Height="25" FontWeight="SemiBold">Printed By:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_PrintedBy" Width="145" Height="25"
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         
+                                         Background="FloralWhite" 
+                                         Foreground="black" BorderThickness="1">
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                            </StackPanel>
+
+
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Margin="4,20,4,4" Orientation="Vertical">
+
+                            <!-- Total Interval -->
+                            <StackPanel Orientation="Horizontal"  Margin="0,0,0,0">
+                                <Label Width="90" Height="25" FontWeight="SemiBold">Total Interval:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_TotInterval" Width="145" 
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         Background="FloralWhite" 
+                                         Foreground="black" BorderThickness="1" >
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+
+                            </StackPanel>
+
+                            <!-- Total PCS Measure -->
+                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0" >
+                                <Label Width="90" Height="25" FontWeight="SemiBold" >Total PCS:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_TotPCS" Width="145" 
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         Background="FloralWhite" 
+                                         Foreground="black" BorderThickness="1">
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                            </StackPanel>
+
+                            <!-- Temperature -->
+                            <StackPanel Orientation="Horizontal"  Margin="0,3,0,0">
+                                <Label Width="90" Height="25" FontWeight="SemiBold">Temperature:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_Temperature" Width="145" 
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         Background="FloralWhite" 
+                                         Foreground="black" BorderThickness="1">
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                            </StackPanel>
+
+
+
+
+
+
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+
+                            <TextBlock Text="Measurement Result" HorizontalAlignment="Left" 
+                                       VerticalAlignment="Top" Margin="0,0,0,0" FontSize="12" 
+                                       
+                                       TextDecorations="underline"
+                                       FontWeight="SemiBold"/>
+
+                            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                                <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
+
+                                    <DataGrid Height="309" Width="auto" 
+                                    Margin="0,5,0,0" Padding="0,0,0,0"
+                                    Name="Average_Grid" VerticalAlignment="Stretch" 
+                                              HorizontalAlignment="Stretch" Background="Transparent"
+                                              ColumnHeaderHeight="30"
+                                              ColumnHeaderStyle="{StaticResource HeaderStyle}"
+                                               ItemsSource="{Binding}" AutoGenerateColumns="False" 
+                                              >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Binding="{Binding PerBatch_ID_cls}" Header="Interval No" />
+                                            <DataGridTextColumn Binding="{Binding measure_result_cls}" Header="Ave Mea. Value" />
+                                            <DataGridTextColumn Binding="{Binding No_Of_Peaces}" Header="No. of PCS" />
+                                            <DataGridTextColumn Binding="{Binding created_on_cls}" Header="Date/Time" />
+                                        </DataGrid.Columns>
+
+                                        <DataGrid.RowStyle>
+                                            <Style TargetType="DataGridRow">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding State}" Value="State1">
+                                                        <Setter Property="Background" Value="Red"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding State}" Value="State2">
+                                                        <Setter Property="Background" Value="Green"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGrid.RowStyle>
+                                    </DataGrid>
+
+                                </StackPanel>
+
+                            </Grid>
+
+
+                            <!-- Final Average -->
+                            <StackPanel Orientation="Horizontal">
+                                <Label Width="90" Height="30" FontWeight="SemiBold">Final Average:</Label>
+                                <Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" 
+                                        Background="FloralWhite" 
+                                        Height="25" Margin="0,3,0,5">
+                                    <Border BorderThickness="0 0 1.2 1.2" CornerRadius="0.5" BorderBrush="White" Padding="0.5">
+                                        <TextBox Width="135" Text="" IsEnabled="False" Height="30" Name="txt_FinalAverage" 
+                                                 Background="Transparent" VerticalAlignment="Center" 
+                                                 TextAlignment="Center" ></TextBox>
+                                    </Border>
+                                </Border>
+
+                                <Button Width="100" Height="25" Margin="35,0,0,5" Padding="3" 
+                                        HorizontalAlignment="Left" 
+                                 FontSize="14" Background="#264653"  
+                                Foreground="AntiqueWhite" FontWeight="Medium"  FontFamily="calibri" 
+                                        Click="Generate_PDF_Click" >Generate PDF</Button>
+                                <Button Width="0" Height="25" Margin="10,0,0,5" Padding="3" HorizontalAlignment="Left" 
+                                 FontSize="14" Background="#264653"   
+                                Foreground="AntiqueWhite" FontWeight="Medium"  
+                                        FontFamily="calibri" >Generate Excel</Button>
+
+                            </StackPanel>
+
+                            <!-- Button -->
+                            <StackPanel Orientation="Horizontal">
+                            </StackPanel>
+
+                        </StackPanel>
+
+
+
+
+                        <!--
+                        <Button Width="100" Height="40" Margin="20,5,0,0" Padding="0" HorizontalAlignment="Left"
+                                    Grid.Row="4" Click="Generate_PDF" Grid.Column="0" 
+                                Grid.ColumnSpan="2">Generate PDF</Button>
+                            -->
+
+                    </Grid>
+
+
+                </Grid>
+
+                <!-- PDF section Finish-->
+
+                <!-- Error Message Start-->
+
+                <!-- Error Message Finish -->
+
+                <!-- Thereshold Counter Start-->
+
+                <!-- Thereshold Counter Finish-->
+
+
+            </Grid>
+            <TextBox Background="White" Name="Error_TextBox_Title" TextAlignment="Left" AcceptsReturn="True" FontSize="15"
+                     VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" FontWeight="Bold" TextDecorations="Underline"
+                     HorizontalAlignment="Left" Height="30" Margin="18,400,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
+                     Text="Error_Textbox_Titleee" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
+            
+            <TextBox Background="White" Name="Error_TextBox_Detail" TextAlignment="Left" AcceptsReturn="True" 
+                     VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" 
+                     HorizontalAlignment="Left" Height="84" Margin="18,429,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
+                     Text="Error_TextBox_Detaill" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
+            
+            <TextBox Background="White" x:Name="Error_TextBox_Fixing" TextAlignment="Left" AcceptsReturn="True" 
+                     VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" 
+                     HorizontalAlignment="Left" Height="114" Margin="283,399,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
+                     Text="Error_TextBox_Fixing" VerticalAlignment="Top" Width="255" VerticalContentAlignment="Top" />
+            
+            <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="506,580,0,0" VerticalAlignment="Top"/>
+            <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="233,579,0,0" VerticalAlignment="Top"/>
+            
+            <TextBox Name="TheresholdMax_TextBox" Height="27" Margin="84,575,0,0" 
+                     TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+
+            <TextBox Name="TheresholdMin_TextBox" Height="27" Margin="352,575,0,0" 
+                     TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+            
+            <TextBox Name="NumOf_TheresholdMin_TextBox" Height="27" Margin="446,575,0,0" 
+                     
+                     TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+            
+            <TextBox Name="NumOf_TheresholdMax_TextBox" Height="27" Margin="173,575,0,0" 
+                    TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+        </Grid>
+    </ScrollViewer>
+
+</Window>

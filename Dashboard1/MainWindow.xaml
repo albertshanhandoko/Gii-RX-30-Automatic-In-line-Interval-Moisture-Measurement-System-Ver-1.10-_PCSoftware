@@ -1,0 +1,210 @@
+﻿<Window x:Class="Dashboard1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dashboard1"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+        Title="Gii MX-01 Measurement Systemz" 
+        mc:Ignorable="d" Height="670" Width="1124" ResizeMode="CanMinimize" 
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="{StaticResource main_page}"></ImageBrush>
+    </Window.Background>
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Grid x:Name="Grid">
+                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="CadetBlue" />
+                                <Border x:Name="Rectangle1" CornerRadius="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Tag" Value="Horizontal">
+                                    <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
+                                    <Setter TargetName="Rectangle1" Property="Height" Value="7" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--ScrollBars-->
+            <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+                <Setter Property="Foreground" Value="LightGray" />
+                <Setter Property="Background" Value="DarkGray" />
+                <Setter Property="Width" Value="10" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid x:Name="GridRoot" Width="19" Background="{x:Null}">
+                                <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
+                                    <Track.Thumb>
+                                        <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" />
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                    </Track.DecreaseRepeatButton>
+                                </Track>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
+                                    <Setter Value="{DynamicResource ButtonSelectBrush}" TargetName="Thumb" Property="Background" />
+                                </Trigger>
+                                <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
+                                    <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                                <Trigger Property="Orientation" Value="Horizontal">
+                                    <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Width" Value="Auto" />
+                                    <Setter Property="Height" Value="12" />
+                                    <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
+                                    <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                    <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Grid Margin="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="425*"/>
+            <ColumnDefinition Width="103*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <!-- Title Start -->
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="5"/>
+            <!-- Title Finish-->
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Background="Transparent" Margin="-32,5,-36,46" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <Grid Margin="0,0,0.333,-0.334" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Grid.ColumnSpan="3">
+                    <StackPanel Orientation="Vertical" Margin="15,30,382,-25">
+
+
+                        <TextBlock Text="How to use this application:"   
+                                   HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top"
+                               FontFamily="Champagne &amp;Limousines" Name="guide_title" FontWeight="Bold" 
+                               FontSize="16" Margin="0,10,0,10"  Foreground="White"/>
+                        <TextBlock Text="1. After connecting the USB, go to 'Device Manager' and look under 'Ports (COM &amp; LPT)' to check COM Port number" 
+                                   Name="guide_step1" 
+                                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                               FontFamily="Champagne &amp;Limousines" 
+                               FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
+                        <TextBlock Text="2. Select the COM Port number for each SENSOR accordingly and select the Baud rate to be 600." 
+                                   Name="guide_step2"
+                                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                               FontFamily="Champagne &amp;Limousines" 
+                               FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
+                        <TextBlock Text="3. Press 'START' to enter SENSOR page before you start measuring with the in-line moisture tester." 
+                                   Name="guide_step3" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               FontFamily="Champagne &amp;Limousines" 
+                               FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
+                        <TextBlock Text="4. After each measurement is finished, close the SENSOR window and press 'START' again to open new window for next measurement." 
+                                   Name="guide_step4" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               FontFamily="Champagne &amp;Limousines" 
+                               FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
+                        <TextBlock Text="5. Please contact indo_sales@globalinstrumentsg.com for any issues." 
+                                  Name="guide_step5" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               FontFamily="Champagne &amp;Limousines" 
+                               FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
+                        <TextBlock Text="* Click refresh button, in case Serial Port can't be found." 
+                                  Name="guide_step6" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               FontFamily="Champagne &amp;Limousines" 
+                               FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
+                        <TextBox Width="0" Height="0" Name="txt_sensornum_temp" Background="Transparent" 
+                                 VerticalAlignment="Center" TextAlignment="Center"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"/>
+
+                    <!--
+                    <Image Name="imgDynamic" Source="{Binding Picture}" Margin="10" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill" 
+                            Width="640" Height="640" VerticalAlignment="top" HorizontalAlignment="Right"/>
+                    -->
+
+
+                    <StackPanel Orientation="Vertical">
+                        <Button Width="0" Height="35" Margin="5,5,5,5" Padding="5" Click="Refresh_click"
+                                        Background="#264653" VerticalAlignment="Top" HorizontalAlignment="Right"
+                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
+                            Refresh
+                        </Button>
+
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+            <TextBox x:Name="txt_compname" HorizontalAlignment="Left" Height="23" Margin="803,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="245" Padding="3,0,0,0" VerticalContentAlignment="Center" Text="" FontWeight="SemiBold" Background="FloralWhite" Foreground="black" BorderThickness="1" FontSize="10"/>
+
+            <TextBox x:Name="txt_compaddr" HorizontalAlignment="Left" Height="24" Margin="803,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="245"  Padding="3,0,0,0" VerticalContentAlignment="Center" Text="" FontSize="10" FontWeight="SemiBold" Background="FloralWhite" Foreground="black" BorderThickness="1"/>
+            <Button x:Name="button_logo" Click="Button_CompLogo_click" Content="" HorizontalAlignment="Left" Margin="804,97,0,0" VerticalAlignment="Top" Width="83" Height="25" Background="#edc064"/>
+            <Button Click="Browse_Template_Click" Content="Browse" HorizontalAlignment="Left" Margin="804,127,0,0" VerticalAlignment="Top" Width="83" Height="25" Foreground="Black" Background="#edc064" FontSize="12" FontWeight="Bold"/>
+            <ComboBox x:Name="ComboBox_Pagesize" HorizontalAlignment="Left" Text="--Select Output--" Margin="804,157,0,0" VerticalAlignment="Top" Width="227" Height="35" Foreground="White"/>
+            <Button Click="Add_Company_Data_click" Background="#264653"  x:Name="button_save_compdata" Content="Save" HorizontalAlignment="Left" Margin="898,97,0,0" VerticalAlignment="Top" Width="61" Height="25"/>
+            <Label x:Name="Label_Logo" Content="Browse" HorizontalAlignment="Left" Margin="820,96,0,0" VerticalAlignment="Top" Width="56" FontWeight="Bold"/>
+
+        </Grid>
+
+
+        <Grid Grid.Row="3" Margin="0,5,5,0" Grid.ColumnSpan="2" />
+
+        <Grid Grid.Row="5" Background="Transparent" Grid.ColumnSpan="2"/>
+        <RadioButton Checked="RadioBtn1_English" Name="RadioBtn_English" Content="English" HorizontalAlignment="Left" Margin="650,-11,0,0" VerticalAlignment="Top" Width="108"/>
+        <RadioButton Checked="RadioBtn1_Indo" Name="RadioBtn_Bahasa" Content="Bahasa" HorizontalAlignment="Left" Margin="720,-11,0,0" VerticalAlignment="Top"/>
+        <Button Click="Button_Click_1" Content="ENTER" HorizontalAlignment="Left" Margin="126,87,0,-84" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_2" Content="ENTER" HorizontalAlignment="Left" Margin="302,87,0,-82" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_3" Content="ENTER" HorizontalAlignment="Left" Margin="492,87,0,-80" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_4" Content="ENTER" HorizontalAlignment="Left" Margin="668,87,0,-80" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_5" Content="ENTER" HorizontalAlignment="Left" Margin="0,87,0,-78" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black" Grid.Column="1"/>
+        <Button Click="Button_Click_6" Content="ENTER" HorizontalAlignment="Left" Margin="126,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_7" Content="ENTER" HorizontalAlignment="Left" Margin="302,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_8" Content="ENTER" HorizontalAlignment="Left" Margin="492,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_9" Content="ENTER" HorizontalAlignment="Left" Margin="669,279,0,-265" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_10" Content="ENTER" HorizontalAlignment="Left" Margin="0,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black" Grid.Column="1"/>
+        <TextBox Width="0" Height="0" Name="TempObject_Textbox"></TextBox>
+    </Grid>
+</Window>
