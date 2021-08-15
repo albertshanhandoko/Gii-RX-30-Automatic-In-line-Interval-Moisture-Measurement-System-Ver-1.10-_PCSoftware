@@ -26,6 +26,6 @@ namespace Dashboard1.Library
 
         public List<Sql_Measure_Result> List_Average_Result { get; set; }
 
-
+        
     }
 }

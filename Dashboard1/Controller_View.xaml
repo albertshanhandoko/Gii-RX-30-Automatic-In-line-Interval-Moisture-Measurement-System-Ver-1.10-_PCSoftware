@@ -130,7 +130,7 @@
                         <DataGrid Height="212" Width="auto" 
                              Margin="0,0,10,0" Padding="0,0,0,0"
                              x:Name="HistoryGrid1" VerticalAlignment="Top" Background="Transparent"
-                                   ColumnHeaderStyle="{StaticResource PDFHeaderStyle}"
+                                   ColumnHeaderStyle="{StaticResource PDFHeaderStyle}" SelectionChanged="HistoryGrid1_SelectionChanged"
                                   
                                   
                                   >
@@ -138,6 +138,7 @@
 
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow" >
+                                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding State}" Value="State1">
                                             <Setter Property="Background" Value="Red"></Setter>
@@ -153,7 +154,7 @@
                         <Button Width="100" Height="25" Margin="5,15,0,5" Padding="3" 
                                 HorizontalAlignment="Left" 
                       FontSize="14" Background="#264653" 
-                      Foreground="Transparent" FontWeight="Medium"  FontFamily="calibri" Content="Link to Folder" />
+                      Foreground="White" FontWeight="Medium"  FontFamily="calibri" Content="Link to Folder" Click="Button_Click" />
 
 
                     </StackPanel>
@@ -397,10 +398,11 @@
                                  FontSize="14" Background="#264653"  
                                 Foreground="AntiqueWhite" FontWeight="Medium"  FontFamily="calibri" 
                                         Click="Generate_PDF_Click" >Generate PDF</Button>
-                                <Button Width="0" Height="25" Margin="10,0,0,5" Padding="3" HorizontalAlignment="Left" 
+                                
+                                <Button Width="100" Height="25" Margin="10,0,0,5" Padding="3" HorizontalAlignment="Left" 
                                  FontSize="14" Background="#264653"   
                                 Foreground="AntiqueWhite" FontWeight="Medium"  
-                                        FontFamily="calibri" >Generate Excel</Button>
+                                        FontFamily="calibri" Click="btn_Excel_Download" >Generate Excel</Button>
 
                             </StackPanel>
 
@@ -439,17 +441,17 @@
             <TextBox Background="White" Name="Error_TextBox_Title" TextAlignment="Left" AcceptsReturn="True" FontSize="15"
                      VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" FontWeight="Bold" TextDecorations="Underline"
                      HorizontalAlignment="Left" Height="30" Margin="18,400,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
-                     Text="Error_Textbox_Titleee" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
+                     Text="" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
             
             <TextBox Background="White" Name="Error_TextBox_Detail" TextAlignment="Left" AcceptsReturn="True" 
                      VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" 
                      HorizontalAlignment="Left" Height="84" Margin="18,429,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
-                     Text="Error_TextBox_Detaill" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
+                     Text="" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
             
             <TextBox Background="White" x:Name="Error_TextBox_Fixing" TextAlignment="Left" AcceptsReturn="True" 
                      VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" 
                      HorizontalAlignment="Left" Height="114" Margin="283,399,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
-                     Text="Error_TextBox_Fixing" VerticalAlignment="Top" Width="255" VerticalContentAlignment="Top" />
+                     Text="" VerticalAlignment="Top" Width="255" VerticalContentAlignment="Top" />
             
             <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="506,580,0,0" VerticalAlignment="Top"/>
             <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="233,579,0,0" VerticalAlignment="Top"/>

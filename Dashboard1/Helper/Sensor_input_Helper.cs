@@ -393,6 +393,60 @@ namespace Dashboard1.Helper
 
         }
 
+
+        public static List<Sql_Excel_Measure> MySql_Get_ExcelLastMeasure(string IP_Address_varinput)
+        {
+
+            string database = "sensor_database";
+            string user = "root";
+            //string password = "admin";
+            string password = "raspberry";
+            string port = "3306";
+            string sslM = "none";
+            string connectionString;
+            connectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", IP_Address_varinput, port, user, password, database, sslM);
+
+            List<Sql_Excel_Measure> List_Excel_Results = new List<Sql_Excel_Measure> { };
+            
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand("Get_ExcelMeasure", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new MySqlParameter("IP_Address_Var", IP_Address_varinput));
+                command.Connection.Open();
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Sql_Excel_Measure Current_Excel_Result = new Sql_Excel_Measure { };
+                        Current_Excel_Result.Batch_ID = Convert.ToInt32(reader["Batch_Measure_ID"]);
+                        Current_Excel_Result.IP_Address = reader["IPADDRESS"].ToString();
+                        Current_Excel_Result.Product = reader["Product"].ToString();
+                        Current_Excel_Result.Total_Interval = (Convert.ToInt32(reader["Total_Interval"]));
+                        Current_Excel_Result.Time_Interval = reader["Time_Interval"].ToString();
+                        Current_Excel_Result.Number_Per_Interval = (Convert.ToInt32(reader["Number_Per_Interval"]));
+                        Current_Excel_Result.Temperature = reader["temperature"].ToString();
+                        Current_Excel_Result.Error_Code = reader["Error_Code"].ToString();
+                        Current_Excel_Result.Current_Interval = (Convert.ToInt32(reader["Current_Interval"]));
+                        Current_Excel_Result.Current_KernelCounter = (Convert.ToInt32(reader["Current_KernelCounter"]));
+                        Current_Excel_Result.Measurement_Result = float.Parse(reader["Measurement_Result"].ToString());
+                        Current_Excel_Result.Result_Type = reader["Result_Type"].ToString();
+
+                        List_Excel_Results.Add(Current_Excel_Result);
+
+                    }
+
+                }
+
+                command.Connection.Close();
+
+                return List_Excel_Results;
+            }
+
+        }
+
+
         public static List<Data_PDFHistory> MySql_Get_PrintPDF(string IP_Address_varinput)
         {
             //MySqlConnection connection;

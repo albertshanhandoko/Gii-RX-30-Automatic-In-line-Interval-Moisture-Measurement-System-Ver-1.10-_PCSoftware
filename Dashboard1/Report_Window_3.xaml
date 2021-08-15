@@ -95,6 +95,7 @@
                                     <Style TargetType="DataGridRow">
                                         <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
                                     </Style>
+                                    
                                 </DataGrid.ItemContainerStyle>
                             </DataGrid>
 

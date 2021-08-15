@@ -35,6 +35,8 @@ using Color = System.Drawing.Color;
 using Spire.Pdf;
 using Size = System.Drawing.Size;
 using System.Drawing.Drawing2D;
+using System.Data;
+using System.Reflection;
 
 namespace Dashboard1.Helper
 {
@@ -127,8 +129,7 @@ namespace Dashboard1.Helper
                 }
 
 
-                int i = 6;
-                for (int j = 1; j <= 6; j++)
+                for (int j = 1; j <= 10; j++)
                 {
                     //Print_Result_Sensor1
                     //string pathresult = @"D:\Sensor_Data\Print_Result_Sensor" + j.ToString();
@@ -143,6 +144,7 @@ namespace Dashboard1.Helper
                     {
                         DirectoryInfo dir_pathresult = Directory.CreateDirectory(pathresult);
                     }
+                    /*
                     string pathhistory = Folder_Path + "History_data_Sensor" + j.ToString();
 
                     if (Directory.Exists(pathhistory))
@@ -153,6 +155,7 @@ namespace Dashboard1.Helper
                     {
                         DirectoryInfo dir_pathhistory = Directory.CreateDirectory(pathhistory);
                     }
+                    */
 
                 }
                 Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(pathmain));
@@ -3805,8 +3808,8 @@ namespace Dashboard1.Helper
             )
         {
             string trimmedlabel = String.Concat(label.Where(c => !Char.IsWhiteSpace(c)));
-            string UrlPDF = Folder_Path + "Print_Result_" + "Sensor1".Trim() + "/" + label
-                + "_" + "Sensor 1" + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm").Trim() + "hr" + ".pdf";
+            string PDF_Filename = label + "_" + "Sensor 1" + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm").Trim() + "hr" + ".pdf";
+            string UrlPDF = Folder_Path + "Print_Result_" + "Sensor1".Trim() + "/" + PDF_Filename;
 
             Workbook workbook = new Workbook();
 
@@ -4092,8 +4095,8 @@ namespace Dashboard1.Helper
             )
         {
             string trimmedlabel = String.Concat(label.Where(c => !Char.IsWhiteSpace(c)));
-            string UrlPDF = Folder_Path + "Print_Result_" + "Sensor1".Trim() + "/" + label
-                + "_" + "Sensor 1" + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm").Trim() + "hr" + ".pdf";
+            string PDF_Filename = label + "_" + "Sensor "+ batch_data.ipaddress_cls.Last() + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm").Trim() + "hr" + ".pdf";
+            string UrlPDF = Folder_Path + "Print_Result_" + "Sensor".Trim() + batch_data.ipaddress_cls.Last() + "/" + PDF_Filename;
 
             Workbook workbook = new Workbook();
 
@@ -4178,7 +4181,7 @@ namespace Dashboard1.Helper
             {
                 total_average = total_average + Measure_Average.measure_result_cls;
             }
-            sheet.Range["W8"].Text = (total_average / batch_data.List_Average_Result.Count()).ToString() + "%";
+            sheet.Range["W8"].Text = (total_average / batch_data.List_Average_Result.Count()).ToString("0.00") + "%";
             // 
 
             //sheet.Range["L11"].Value = "Total No Of intervals";
@@ -4357,12 +4360,38 @@ namespace Dashboard1.Helper
             Worksheet sheet_pdf = workbook.Worksheets[0];
             //string targetpdf = UrlPDF;
             sheet_pdf.SaveToPdf(UrlPDF);
-            sheet_pdf.SaveToImage("C:\\Sensor_data\\testimage123.png");
-            Sensor_input_Helper.MySql_Insert_PDF(batch_data.ipaddress_cls, batch_data.batch_measure_ID_cls,
-                label, printedby, DateTime.Now, UrlPDF);
-
+            //sheet_pdf.SaveToImage("C:\\Sensor_data\\testimage123.png");
+            //Sensor_input_Helper.MySql_Insert_PDF(batch_data.ipaddress_cls, batch_data.batch_measure_ID_cls, label, printedby, DateTime.Now, UrlPDF);
+            Sensor_input_Helper.MySql_Insert_PDF(batch_data.ipaddress_cls, batch_data.batch_measure_ID_cls, label, printedby, DateTime.Now, PDF_Filename);
         }
 
+        
+        public static DataTable ToDataTable<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+
+            //Get all the properties
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Defining type of data column gives proper data table 
+                var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name, type);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
+        }
 
 
         public static void Insert_Chart_Data(Worksheet sheet, List<float> List_Histo_Value, List<int> List_Freq_Value)
@@ -4430,6 +4459,7 @@ namespace Dashboard1.Helper
             }
             catch { }
         }
+
 
 
         public string ProcessSensorData(SerialPort mySerialPort, object sender, SerialDataReceivedEventArgs args)

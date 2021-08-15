@@ -338,7 +338,7 @@ namespace Dashboard1.Constant
 
         // 5 minutes
         [Description("In automatic/manual measurement, there was no grain feed for more than five minutes.")]
-        error030, // STX 020 ETX CheckSUM CR
+        error011, // STX 020 ETX CheckSUM CR
         // finish found during measurement
 
         // Check Command
@@ -370,7 +370,7 @@ namespace Dashboard1.Constant
 
         // 5 minutes
         [Description("Reset with the [STOP] key. Clean the grain intake on PU-359")]
-        error030, // STX 020 ETX CheckSUM CR
+        error011, // STX 020 ETX CheckSUM CR
 
 
         // Check Command

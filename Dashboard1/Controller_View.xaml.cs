@@ -17,6 +17,10 @@ using Dashboard1.Constant;
 using Dashboard1.Library;
 using System.Configuration;
 using System.Media;
+using System.Diagnostics;
+using Spire;
+using Spire.Xls;
+using System.Data;
 
 namespace Dashboard1
 {
@@ -35,7 +39,8 @@ namespace Dashboard1
         //string IP_Address_Input = "192.168.0.9";
         string test_textbox = ((MainWindow)Application.Current.MainWindow).TempObject_Textbox.Text;
         string IP_Address_Input = ((MainWindow)Application.Current.MainWindow).TempObject_Textbox.Text;
-
+        static string Folder_Path = ConfigurationManager.AppSettings["Folder_Path"] ?? "Not Found"; //C:/Sensor_data/
+        string PDF_folder_location = Folder_Path+ "Print_Result_Sensor" + ((MainWindow)Application.Current.MainWindow).TempObject_Textbox.Text.Last() + "/" ; 
 
         List<Sql_Measure_Result> List_Measure_Average = new List<Sql_Measure_Result> { };
         List<Sql_Measure_Result> List_Measure_Average_new = new List<Sql_Measure_Result> { };
@@ -102,6 +107,7 @@ namespace Dashboard1
             try
             {
                 Sensor_Batch = Sensor_input_Helper.MySql_Get_Average(IP_Address_Input);
+                
                 List_PDF_Histories = Sensor_input_Helper.MySql_Get_PrintPDF(IP_Address_Input);
                 List_Data_Configs = Sensor_input_Helper.MySql_Get_DataConfig(IP_Address_Input);
 
@@ -117,7 +123,7 @@ namespace Dashboard1
                 string Error_Message_Detail = string.Empty;
                 string Error_Message_Fixing = string.Empty;
 
-                if (Sensor_Batch.Error_code_cls != "" && Sensor_Batch.Error_code_cls != string.Empty)
+                if (Sensor_Batch.Error_code_cls != "" && Sensor_Batch.Error_code_cls != string.Empty && Sensor_Batch.Error_code_cls != null)
                 {
                     Error_Message_Title = "Err " + Sensor_Batch.Error_code_cls;
 
@@ -146,7 +152,8 @@ namespace Dashboard1
                 // klo ganti batch ngapain
                 else
                 {
-                    txt_date.Text = DateTime.Now.ToString();
+                    //txt_date.Text = DateTime.Now.ToString();
+                    txt_date.Text = Sensor_Batch.start_date_cls;
                     txt_application.Text = Sensor_Batch.product_cls;
                     txt_TotInterval.Text = Sensor_Batch.total_interval_cls.ToString();
                     txt_TotPCS.Text = (Sensor_Batch.total_interval_cls * Sensor_Batch.number_per_interval_cls).ToString();
@@ -155,6 +162,12 @@ namespace Dashboard1
                     List_Measure_Average = Sensor_Batch.List_Average_Result;
                     lastbatchid = Sensor_Batch.batch_measure_ID_cls;
 
+                }
+                Sensor_Batch.start_date_cls = txt_date.Text;
+                total_average = 0;
+                foreach (Sql_Measure_Result Measure_Average in List_Measure_Average)
+                {
+                    total_average = total_average + Measure_Average.measure_result_cls;
                 }
 
                 final_average = total_average / List_Measure_Average.Count();
@@ -168,16 +181,13 @@ namespace Dashboard1
 
                     Average_Grid.ItemsSource = List_Measure_Average;
                 }));
-                total_average = 0;
-                foreach (Sql_Measure_Result Measure_Average in List_Measure_Average)
-                {
-                    total_average = total_average + Measure_Average.measure_result_cls;
-                }
+                
+                
 
                 bool check_need_to_print = Sensor_input_Helper.is_batch_printed(IP_Address_Input, Sensor_Batch.batch_measure_ID_cls);
 
                 Application.Current.Dispatcher.Invoke(new Action(() => {
-                    txt_FinalAverage.Text = final_average.ToString();
+                    txt_FinalAverage.Text = final_average.ToString("0.00");
 
                     HistoryGrid1.ItemsSource = List_PDF_Histories;
 
@@ -216,7 +226,7 @@ namespace Dashboard1
             }
             catch (Exception error)//(Exception e)
             {
-                MessageBox.Show(error.ToString(), application_name);
+                //MessageBox.Show(error.ToString(), application_name);
                 Console.WriteLine(error.Message);
             }
 
@@ -277,6 +287,55 @@ namespace Dashboard1
 
         private void Error_TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Folder_Path);
+
+        }
+
+        private void HistoryGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            string selectedclick = HistoryGrid1.SelectedItems.ToString();
+            Data_PDFHistory PDFHistory = (Data_PDFHistory)HistoryGrid1.SelectedItem;
+            //D:\Sensor_Data\Print_Result_Sensor1
+
+            //string urlpdf = "D:/Sensor_data/Print_Result_Sensor1/" + PDFHistory.Histories;
+            string urlpdf = PDF_folder_location + PDFHistory.Histories;
+
+            Console.WriteLine(urlpdf);
+            Process.Start("sumatrapdf.exe");
+            System.Diagnostics.Process.Start(urlpdf);
+            //Process.Start("sumatrapdf.exe", urlpdf);
+            //Process.Start("sumatrapdf.exe", "C:\\Sensor_data\\Print_Result_Sensor5\\_Sensor 5_20210815_1208hr");
+
+
+        }
+
+        private void btn_Excel_Download(object sender, RoutedEventArgs e)
+        {
+            Workbook book = new Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            //convert the datagrid source to datatable
+            //DataTable table = ((DataView)this.dataGrid1.ItemsSource).Table;
+            List<Sql_Excel_Measure> result_excel = Sensor_input_Helper.MySql_Get_ExcelLastMeasure(IP_Address_Input);
+
+
+            IEnumerable<Sql_Excel_Measure> data = result_excel;
+            DataTable table = new DataTable();
+            table = SensorHelper_2.ToDataTable(result_excel);
+            sheet.InsertDataTable(table, true, 1, 1);
+            string ExcelFile_Name = "Sensor " + IP_Address_Input.Last() + "_"+ DateTime.Now.ToString("yyyy_MM_dd_HH_mm") + ".xlsx";
+            string ExcelURL = PDF_folder_location + ExcelFile_Name;
+            //book.SaveToFile("exportDataGridToExcel.xlsx", ExcelVersion.Version2013);
+            book.SaveToFile(ExcelURL, ExcelVersion.Version2013);
 
         }
     }

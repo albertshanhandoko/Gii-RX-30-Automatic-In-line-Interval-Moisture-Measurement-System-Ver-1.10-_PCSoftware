@@ -107,54 +107,7 @@ namespace Dashboard1
             // A4 and A5 page size
             ComboBox_Pagesize.Items.Clear();
 
-            //ComboBox_Port1.Items.Clear();
-            /*
-            ComboBox_Port2.Items.Clear();
-            ComboBox_Port3.Items.Clear();
-            ComboBox_Port4.Items.Clear();
-            ComboBox_Port5.Items.Clear();
-            ComboBox_Port6.Items.Clear();
-            //ComboBox_input_data.Items.Clear();
-
-            //ComboBox_BaudRate1.Items.Clear();
-            ComboBox_BaudRate2.Items.Clear();
-            ComboBox_BaudRate3.Items.Clear();
-            ComboBox_BaudRate4.Items.Clear();
-            ComboBox_BaudRate5.Items.Clear();
-            ComboBox_BaudRate6.Items.Clear();
-            //ComboBox_Input_Baud.Items.Clear();
-            
-            foreach (var portname in portNames)
-            {
-                //ComboBox_Port1.Items.Add(portname.ToString());
-                ComboBox_Port2.Items.Add(portname.ToString());
-                ComboBox_Port3.Items.Add(portname.ToString());
-                ComboBox_Port4.Items.Add(portname.ToString());
-                ComboBox_Port5.Items.Add(portname.ToString());
-                ComboBox_Port6.Items.Add(portname.ToString());
-                ComboBox_Port6.Items.Add(portname.ToString());
-                //ComboBox_input_data.Items.Add(portname.ToString());
-            }
-
-            List<int> ListBaudRate = new List<int>(new int[] {
-                110, 300, 600, 1200, 2400, 4800, 9600, 14400
-             , 19200, 38400, 57600, 115200, 128000
-
-            });
-            List<string> Combobox_Baudrate = ListBaudRate.ConvertAll<string>(delegate (int i) { return i.ToString(); });
-
-
-            foreach (var Baudrate in Combobox_Baudrate)
-            {
-                //ComboBox_BaudRate1.Items.Add(Baudrate);
-                ComboBox_BaudRate2.Items.Add(Baudrate);
-                ComboBox_BaudRate3.Items.Add(Baudrate);
-                ComboBox_BaudRate4.Items.Add(Baudrate);
-                ComboBox_BaudRate5.Items.Add(Baudrate);
-                ComboBox_BaudRate6.Items.Add(Baudrate);
-                //ComboBox_Input_Baud.Items.Add(Baudrate);
-            }
-            */
+          
 
             BitmapImage src = new BitmapImage(new Uri("pack://application:,,,/Resources/Global_Instrument_Logo.jpeg", UriKind.Absolute));
             //imgDynamic.Source = src;

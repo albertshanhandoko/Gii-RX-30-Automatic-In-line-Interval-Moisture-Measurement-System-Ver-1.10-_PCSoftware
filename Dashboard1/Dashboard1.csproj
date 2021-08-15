@@ -16,7 +16,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <CodeAnalysisRuleSet>..\.sonarlint\test_projectcsharp.ruleset</CodeAnalysisRuleSet>
-    <PublishUrl>C:\Users\Ignatius Albert\Documents\Chua\080421\Published\</PublishUrl>
+    <PublishUrl>D:\Publish\Software_PC\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <ProductName>Gii MX-01 Measurement System</ProductName>
-    <ApplicationRevision>176</ApplicationRevision>
+    <ApplicationRevision>178</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -264,6 +264,7 @@
     <Compile Include="Library\Moisture_Measure_enum.cs" />
     <Compile Include="Library\MyObject.cs" />
     <Compile Include="Library\SQL_Data_Config.cs" />
+    <Compile Include="Library\Sql_Excel_Measure.cs" />
     <Compile Include="Library\Sql_Measure_Batch.cs" />
     <Compile Include="Library\SQL_Measure_Grid.cs" />
     <Compile Include="Library\Sql_Measure_Result.cs" />
