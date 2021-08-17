@@ -559,14 +559,14 @@ namespace Dashboard1
                     }
                     else
                     {
-                        MessageBox.Show("Connection to database failed. Please check router or comfile pi", application_name);
+                        MessageBox.Show("Error 001 - Connection to controller failed", application_name);
                     }
 
                     
                 }
                 catch (Exception error)//(Exception e)
                 {
-                    MessageBox.Show("Connection to database failed. Please check router or comfile pi", application_name);
+                    MessageBox.Show("Error 001 - Connection to controller failed", application_name);
                     Console.WriteLine(error.Message);
                 }
             }

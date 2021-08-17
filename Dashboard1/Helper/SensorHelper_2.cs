@@ -4430,14 +4430,11 @@ namespace Dashboard1.Helper
                                 sheet.Range[cellfreq].Value = List_Freq_Value[index].ToString();
                             }
                         }
-
-
                     }
-                    int rounded = (int)Math.Round(List_Histo_Value.Max(), 0) + 5;
 
-                    sheet.Range["B32"].Value = rounded.ToString();
-                    sheet.Range["B62"].Value = rounded.ToString();
-
+                    int FreqMax = List_Freq_Value.Max() + 5;
+                    sheet.Range["B32"].Value = FreqMax.ToString();
+                    sheet.Range["B62"].Value = FreqMax.ToString();
 
                 }
                 catch (Exception error)//(Exception e)
