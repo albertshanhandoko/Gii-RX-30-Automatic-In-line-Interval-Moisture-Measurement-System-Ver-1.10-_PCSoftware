@@ -70,13 +70,13 @@
         </LinearGradientBrush>
 
         <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
-            <Setter Property="Foreground" Value="Black" />
+
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="Padding" Value="10,0,0,0"/>
-            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="MinWidth" Value="0" />
             <Setter Property="MinHeight" Value="30" />
@@ -86,11 +86,10 @@
         </Style>
 
         <Style x:Key="PDFHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
-            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="Padding" Value="0,0,0,0"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -107,7 +106,7 @@
         <Grid Height="612">
             <Grid x:Name="print" Margin="0,0,-17,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="490"/>
                     <RowDefinition Height="auto"/>
 
@@ -118,24 +117,24 @@
 
                 </Grid.ColumnDefinitions>
 
+                <!-- Title -->
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" >
+                    <TextBlock Name="textbox_SensorTitle"  Text="Sensor 1" TextAlignment="Center" FontSize="30" FontWeight="Bold" />
+                </Grid>
+
                 <!-- Historical Section -->
 
                 <Grid Grid.Row="1" Grid.Column="0"  Background="Transparent" >
 
-                    <StackPanel Margin="4,0,4,4" Orientation="Vertical" Background="Transparent">
+                    <StackPanel Margin="4,0,4.333,3.667" Orientation="Vertical" Background="Transparent" Height="547" VerticalAlignment="Bottom">
                         <TextBlock HorizontalAlignment="Left"  
                                    TextDecorations="Underline"
                                    VerticalAlignment="Top" Margin="5,0,0,0" FontSize="18" FontWeight="SemiBold"/>
 
-                        <DataGrid Height="212" Width="auto" 
-                             Margin="0,0,10,0" Padding="0,0,0,0"
+                        <DataGrid Height="212" Width="520" 
                              x:Name="HistoryGrid1" VerticalAlignment="Top" Background="Transparent"
-                                   ColumnHeaderStyle="{StaticResource PDFHeaderStyle}" SelectionChanged="HistoryGrid1_SelectionChanged"
-                                  
-                                  
+                                   ColumnHeaderStyle="{StaticResource PDFHeaderStyle}" SelectionChanged="HistoryGrid1_SelectionChanged"                                 
                                   >
-
-
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow" >
                                     <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
@@ -151,8 +150,8 @@
                             </DataGrid.RowStyle>
                         </DataGrid>
 
-                        <Button Width="100" Height="25" Margin="5,15,0,5" Padding="3" 
-                                HorizontalAlignment="Left" 
+                        <Button Width="100" Height="25" Margin="5,15,15,5" Padding="3" 
+                                HorizontalAlignment="Right" 
                       FontSize="14" Background="#264653" 
                       Foreground="White" FontWeight="Medium"  FontFamily="calibri" Content="Link to Folder" Click="Button_Click" />
 
@@ -183,7 +182,7 @@
 
                             <!--label -->
                             <StackPanel Orientation="Horizontal">
-                                <Label Width="90" Height="25" FontSize="11.5" FontWeight="SemiBold">Supplier Name:</Label>
+                                <Label Width="90" Height="25" FontSize="11.5" FontWeight="Bold">Supplier Name:</Label>
                                 <TextBox Padding="3,0,0,0" Name="txt_supplier" Width="145" 
                                          VerticalContentAlignment="Center" Text="" 
                                          FontSize="10" FontWeight="SemiBold" 
@@ -212,7 +211,7 @@
 
                             <!-- DateTime -->
                             <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
-                                <Label Width="90" Height="25" FontWeight="SemiBold">Date/ Time:</Label>
+                                <Label Width="90" Height="25" FontWeight="Bold">Date/ Time:</Label>
                                 <TextBox Padding="3,0,0,0" Name="txt_date" Width="145" 
                                          VerticalContentAlignment="Center" Text="" 
                                          FontSize="10" FontWeight="SemiBold" 
@@ -231,7 +230,7 @@
 
                             <!-- Application -->
                             <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
-                                <Label Width="90" Height="25" FontWeight="SemiBold">Application:</Label>
+                                <Label Width="90" Height="25" FontWeight="Bold">Application:</Label>
                                 <TextBox Padding="3,0,0,0" Name="txt_application" Width="145" Height="25"
                                          VerticalContentAlignment="Center" Text="" 
                                          FontSize="10" FontWeight="SemiBold" 
@@ -248,23 +247,6 @@
 
                             </StackPanel>
                             <!-- Printed by -->
-                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0" >
-                                <Label Width="90" Height="25" FontWeight="SemiBold">Printed By:</Label>
-                                <TextBox Padding="3,0,0,0" Name="txt_PrintedBy" Width="145" Height="25"
-                                         VerticalContentAlignment="Center" Text="" 
-                                         FontSize="10" FontWeight="SemiBold" 
-                                         
-                                         Background="FloralWhite" 
-                                         Foreground="black" BorderThickness="1">
-                                    <TextBox.Resources>
-                                        <!--to make the border corner round-->
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="CornerRadius" Value="4"/>
-                                        </Style>
-                                    </TextBox.Resources>
-                                </TextBox>
-
-                            </StackPanel>
 
 
 
@@ -274,7 +256,7 @@
 
                             <!-- Total Interval -->
                             <StackPanel Orientation="Horizontal"  Margin="0,0,0,0">
-                                <Label Width="90" Height="25" FontWeight="SemiBold">Total Interval:</Label>
+                                <Label Width="90" Height="25" FontWeight="Bold">Total Interval:</Label>
                                 <TextBox Padding="3,0,0,0" Name="txt_TotInterval" Width="145" 
                                          VerticalContentAlignment="Center" Text="" 
                                          FontSize="10" FontWeight="SemiBold" 
@@ -293,7 +275,7 @@
 
                             <!-- Total PCS Measure -->
                             <StackPanel Orientation="Horizontal" Margin="0,3,0,0" >
-                                <Label Width="90" Height="25" FontWeight="SemiBold" >Total PCS:</Label>
+                                <Label Width="90" Height="25" FontWeight="Bold" >Total PCS:</Label>
                                 <TextBox Padding="3,0,0,0" Name="txt_TotPCS" Width="145" 
                                          VerticalContentAlignment="Center" Text="" 
                                          FontSize="10" FontWeight="SemiBold" 
@@ -308,9 +290,26 @@
                                 </TextBox>
 
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0" >
+                                <Label Width="90" Height="25" FontWeight="Bold">Printed By:</Label>
+                                <TextBox Padding="3,0,0,0" Name="txt_PrintedBy" Width="145" Height="25"
+                                         VerticalContentAlignment="Center" Text="" 
+                                         FontSize="10" FontWeight="SemiBold" 
+                                         
+                                         Background="FloralWhite" 
+                                         Foreground="black" BorderThickness="1">
+                                    <TextBox.Resources>
+                                        <!--to make the border corner round-->
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                            </StackPanel>
 
                             <!-- Temperature -->
-                            <StackPanel Orientation="Horizontal"  Margin="0,3,0,0">
+                            <StackPanel Width="0" Height="0" Orientation="Horizontal"  Margin="0,3,0,0">
                                 <Label Width="90" Height="25" FontWeight="SemiBold">Temperature:</Label>
                                 <TextBox Padding="3,0,0,0" Name="txt_Temperature" Width="145" 
                                          VerticalContentAlignment="Center" Text="" 
@@ -335,34 +334,27 @@
                         </StackPanel>
 
 
-                        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Vertical" Grid.RowSpan="2"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
 
-                            <TextBlock Text="Measurement Result" HorizontalAlignment="Left" 
-                                       VerticalAlignment="Top" Margin="0,0,0,0" FontSize="12" 
-                                       
-                                       TextDecorations="underline"
-                                       FontWeight="SemiBold"/>
-
-                            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"  Grid.ColumnSpan="2">
                                 <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
 
-                                    <DataGrid Height="309" Width="auto" 
-                                    Margin="0,5,0,0" Padding="0,0,0,0"
-                                    Name="Average_Grid" VerticalAlignment="Stretch" 
-                                              HorizontalAlignment="Stretch" Background="Transparent"
+                                    <DataGrid Height="330" Width="550" 
+                                    Name="Average_Grid" Background="Transparent" HorizontalContentAlignment="Center"
                                               ColumnHeaderHeight="30"
                                               ColumnHeaderStyle="{StaticResource HeaderStyle}"
-                                               ItemsSource="{Binding}" AutoGenerateColumns="False" 
+                                               ItemsSource="{Binding}" AutoGenerateColumns="False"
                                               >
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Binding="{Binding PerBatch_ID_cls}" Header="Interval No" />
-                                            <DataGridTextColumn Binding="{Binding measure_result_cls}" Header="Ave Mea. Value" />
+                                            <DataGridTextColumn Binding="{Binding PerBatch_ID_cls}" Header="Interval No."/>
                                             <DataGridTextColumn Binding="{Binding No_Of_Peaces}" Header="No. of PCS" />
-                                            <DataGridTextColumn Binding="{Binding created_on_cls}" Header="Date/Time" />
+                                            <DataGridTextColumn Binding="{Binding measure_result_cls}" Header="Ave. Moist. (%)" />
+                                            <DataGridTextColumn Binding="{Binding created_on_cls}" Header="Date / Time" />
                                         </DataGrid.Columns>
 
                                         <DataGrid.RowStyle>
                                             <Style TargetType="DataGridRow">
+                                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding State}" Value="State1">
                                                         <Setter Property="Background" Value="Red"></Setter>
@@ -370,6 +362,7 @@
                                                     <DataTrigger Binding="{Binding State}" Value="State2">
                                                         <Setter Property="Background" Value="Green"></Setter>
                                                     </DataTrigger>
+                                                    
                                                 </Style.Triggers>
                                             </Style>
                                         </DataGrid.RowStyle>
@@ -382,7 +375,7 @@
 
                             <!-- Final Average -->
                             <StackPanel Orientation="Horizontal">
-                                <Label Width="90" Height="30" FontWeight="SemiBold">Final Average:</Label>
+                                <Label Width="180" Height="30" FontWeight="SemiBold">Final Average Moisture (%)</Label>
                                 <Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" 
                                         Background="FloralWhite" 
                                         Height="25" Margin="0,3,0,5">
@@ -393,12 +386,12 @@
                                     </Border>
                                 </Border>
 
-                                <Button Width="100" Height="25" Margin="35,0,0,5" Padding="3" 
+                                <Button Width="0" Height="25" Margin="35,0,0,5" Padding="3" 
                                         HorizontalAlignment="Left" 
                                  FontSize="14" Background="#264653"  
                                 Foreground="AntiqueWhite" FontWeight="Medium"  FontFamily="calibri" 
                                         Click="Generate_PDF_Click" >Generate PDF</Button>
-                                
+
                                 <Button Width="100" Height="25" Margin="10,0,0,5" Padding="3" HorizontalAlignment="Left" 
                                  FontSize="14" Background="#264653"   
                                 Foreground="AntiqueWhite" FontWeight="Medium"  
@@ -441,21 +434,21 @@
             <TextBox Background="White" Name="Error_TextBox_Title" TextAlignment="Left" AcceptsReturn="True" FontSize="15"
                      VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" FontWeight="Bold" TextDecorations="Underline"
                      HorizontalAlignment="Left" Height="30" Margin="18,400,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
-                     Text="" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
-            
+                     Text="" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" Foreground="Red" />
+
             <TextBox Background="White" Name="Error_TextBox_Detail" TextAlignment="Left" AcceptsReturn="True" 
                      VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" 
                      HorizontalAlignment="Left" Height="84" Margin="18,429,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
-                     Text="" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top" />
-            
+                     Text="" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Top"  Foreground="Red"/>
+
             <TextBox Background="White" x:Name="Error_TextBox_Fixing" TextAlignment="Left" AcceptsReturn="True" 
                      VerticalScrollBarVisibility="Visible" TextChanged="Error_TextBox_TextChanged" 
                      HorizontalAlignment="Left" Height="114" Margin="283,399,0,0" TextWrapping="Wrap" Padding="5,0,5,0"
-                     Text="" VerticalAlignment="Top" Width="255" VerticalContentAlignment="Top" />
-            
+                     Text="" VerticalAlignment="Top" Width="255" VerticalContentAlignment="Top" Foreground="Red" />
+
             <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="506,580,0,0" VerticalAlignment="Top"/>
             <Label Content="Pcs" HorizontalAlignment="Left" Height="26" Margin="233,579,0,0" VerticalAlignment="Top"/>
-            
+
             <TextBox Name="TheresholdMax_TextBox" Height="27" Margin="84,575,0,0" 
                      TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
@@ -463,12 +456,12 @@
             <TextBox Name="TheresholdMin_TextBox" Height="27" Margin="352,575,0,0" 
                      TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
-            
+
             <TextBox Name="NumOf_TheresholdMin_TextBox" Height="27" Margin="446,575,0,0" 
                      
                      TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
-            
+
             <TextBox Name="NumOf_TheresholdMax_TextBox" Height="27" Margin="173,575,0,0" 
                     TextWrapping="Wrap" VerticalAlignment="Top" Width="58" FontSize="15" VerticalContentAlignment="Center"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>

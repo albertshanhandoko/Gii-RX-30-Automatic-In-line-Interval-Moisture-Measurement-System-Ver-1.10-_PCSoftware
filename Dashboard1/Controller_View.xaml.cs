@@ -74,6 +74,7 @@ namespace Dashboard1
         {
             try
             {
+                textbox_SensorTitle.Text = "SENSOR " + ((MainWindow)Application.Current.MainWindow).TempObject_Textbox.Text.Last();
                 Current_Sensor_Batch = Sensor_input_Helper.MySql_Get_Average(IP_Address_Input);
                 lastbatchid = Current_Sensor_Batch.batch_measure_ID_cls;
                 txt_date.Text = Current_Sensor_Batch.start_date_cls;
@@ -258,9 +259,16 @@ namespace Dashboard1
                     Sensor_Batch = Sensor_input_Helper.MySql_Get_Average(IP_Address_Input);
                     string company_name = SensorHelper_2.read_config_name();
                     string company_addres = SensorHelper_2.read_config_addr();
-
+                    bool isPremature = false;
+                    int ExpectedPieces = Sensor_Batch.number_per_interval_cls * Sensor_Batch.total_interval_cls;
+                    int ActualPieces = Sensor_Batch.List_Measure_Result.Count();
+                    if (ActualPieces < ExpectedPieces)
+                    {
+                        isPremature = true;
+                        //MessageBox.Show("Measurement was stopped prematurely", application_name);
+                    }
                     //SensorHelper_2.Generate_Controller_PDF_revised(company_name,company_addres,txt_supplier.Text,txt_PrintedBy.Text,Sensor_Batch,1);
-                    SensorHelper_2.Generate_Controller_PDF_revised_5Aug2021(company_name, company_addres, txt_supplier.Text, txt_PrintedBy.Text, Sensor_Batch, 1, true);
+                    SensorHelper_2.Generate_Controller_PDF_revised_5Aug2021(company_name, company_addres, txt_supplier.Text, txt_PrintedBy.Text, Sensor_Batch, 1, isPremature);
 
 
                     MessageBox.Show("PDF has been successfully generated", application_name);
@@ -336,6 +344,11 @@ namespace Dashboard1
             string ExcelURL = PDF_folder_location + ExcelFile_Name;
             //book.SaveToFile("exportDataGridToExcel.xlsx", ExcelVersion.Version2013);
             book.SaveToFile(ExcelURL, ExcelVersion.Version2013);
+
+        }
+
+        private void Average_Grid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

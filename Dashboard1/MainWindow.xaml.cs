@@ -129,13 +129,14 @@ namespace Dashboard1
             //ComboBox_Pagesize.Items.Add("A5");
             ComboBox_Pagesize.SelectedValuePath = "Key";
             ComboBox_Pagesize.DisplayMemberPath = "Value";
-            ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(0, "A4 Portrait"));
-            ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(1, "2 copies of report in PDF (A4)"));
-            ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(2, "\"9.5\" x \"11\" (cnt form paper)"));
-            ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(3, "\"9.5\" x \"5.5\" (cnt form paper)"));
+            //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(0, "A4 Portrait"));
+            //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(1, "2 copies of report in PDF (A4)"));
+            //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(2, "\"9.5\" x \"11\" (cnt form paper)"));
+            //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(3, "\"9.5\" x \"5.5\" (cnt form paper)"));
+            
+            ComboBox_Pagesize.Items.Add("A4");
+            ComboBox_Pagesize.Items.Add("A5");
             /*
-            ComboBox_Pagesize.Items.Add("A4 Portrait");
-            ComboBox_Pagesize.Items.Add("A5 Landscape");
             ComboBox_Pagesize.Items.Add("A4 Portrait Cnt Paper");
             ComboBox_Pagesize.Items.Add("A5 Landscape Cnt Paper");
             */
