@@ -75,9 +75,10 @@
             <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="0,0,0,0"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="12,0,10,0"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="HorizontalContentAlignment" Value="left" />
             <Setter Property="MinWidth" Value="0" />
             <Setter Property="MinHeight" Value="30" />
             <Setter Property="MaxHeight" Value="30" />
@@ -89,7 +90,7 @@
             <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="Padding" Value="0,0,0,0"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -135,6 +136,8 @@
                              x:Name="HistoryGrid1" VerticalAlignment="Top" Background="Transparent"
                                    ColumnHeaderStyle="{StaticResource PDFHeaderStyle}" SelectionChanged="HistoryGrid1_SelectionChanged"                                 
                                   >
+
+                            
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow" >
                                     <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
@@ -339,9 +342,9 @@
                             <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"  Grid.ColumnSpan="2">
                                 <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
 
-                                    <DataGrid Height="330" Width="550" 
-                                    Name="Average_Grid" Background="Transparent" HorizontalContentAlignment="Center"
-                                              ColumnHeaderHeight="30"
+                                    <DataGrid Height="330" Width="540" 
+                                    Name="Average_Grid" 
+                                              VerticalAlignment="Top" Background="Transparent" 
                                               ColumnHeaderStyle="{StaticResource HeaderStyle}"
                                                ItemsSource="{Binding}" AutoGenerateColumns="False"
                                               >
@@ -354,7 +357,12 @@
 
                                         <DataGrid.RowStyle>
                                             <Style TargetType="DataGridRow">
-                                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                                <Setter Property="Padding" Value="0,0,0,0"/>
+                                                <Setter Property="Margin" Value="0,0,0,0"/>
+                                                <Setter Property="Width" Value="540"/>
+
+
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding State}" Value="State1">
                                                         <Setter Property="Background" Value="Red"></Setter>

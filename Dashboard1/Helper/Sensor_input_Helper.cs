@@ -355,7 +355,9 @@ namespace Dashboard1.Helper
                         while (reader.Read())
                         {
                             Sql_Measure_Result result_average_temp = new Sql_Measure_Result(1, 1, 1f, 1, DateTime.Now.ToString(), 1);
+                            //result_average_temp.PerBatch_ID_cls = (Convert.ToInt32(reader["PerBatch_ID"])) - 100000;
                             result_average_temp.PerBatch_ID_cls = (Convert.ToInt32(reader["PerBatch_ID"])) - 1000;
+
                             result_average_temp.measure_result_cls = float.Parse(reader["measure_result"].ToString());
                             result_average_temp.No_Of_Peaces = (Convert.ToInt32(reader["jumlah_measure"]));
                             //result_average_temp.No_Of_Peaces = query_batch.List_Measure_Result.Count();
@@ -382,6 +384,19 @@ namespace Dashboard1.Helper
 
 
                 }
+
+                // make the result into 10
+                
+                /*
+                int jumlahaverage = 0;
+                jumlahaverage = List_Average_Results.Count;
+                while (jumlahaverage < 10)
+                {
+                    Sql_Measure_Result blank_grid_result = new Sql_Measure_Result(null, null, 0, null, null, null);
+                    List_Average_Results.Add(blank_grid_result);
+                    jumlahaverage = List_Average_Results.Count;
+                }
+                */
 
                 query_batch.List_Average_Result = List_Average_Results;
                 query_batch.List_Measure_Result = List_Measure_Results;
