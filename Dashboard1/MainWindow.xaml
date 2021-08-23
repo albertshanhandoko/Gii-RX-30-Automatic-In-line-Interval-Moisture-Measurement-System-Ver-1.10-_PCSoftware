@@ -97,8 +97,10 @@
 
     <Grid Margin="30">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="425*"/>
-            <ColumnDefinition Width="103*"/>
+            <ColumnDefinition Width="852*"/>
+            <ColumnDefinition Width="57*"/>
+            <ColumnDefinition Width="122*"/>
+            <ColumnDefinition Width="27*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <!-- Title Start -->
@@ -112,7 +114,7 @@
 
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Background="Transparent" Margin="-32,5,-36,46" Grid.ColumnSpan="2" Grid.RowSpan="3">
+        <Grid Grid.Row="1" Background="Transparent" Margin="-32,5,-36,46" Grid.ColumnSpan="4" Grid.RowSpan="3">
             <Grid Margin="0,0,0.333,-0.334" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -157,6 +159,10 @@
                                FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
                         <TextBox Width="0" Height="0" Name="txt_sensornum_temp" Background="Transparent" 
                                  VerticalAlignment="Center" TextAlignment="Center"></TextBox>
+                        <TextBlock Text="* Click refresh button, in case Serial Port can't be found."
+                            x:Name="guide_step7" HorizontalAlignment="Left" VerticalAlignment="Top"
+	                           FontFamily="Champagne &amp;Limousines" FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
+                        
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal"/>
@@ -183,28 +189,33 @@
             <TextBox x:Name="txt_compaddr" HorizontalAlignment="Left" Height="24" Margin="803,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="245"  Padding="3,0,0,0" VerticalContentAlignment="Center" Text="" FontSize="10" FontWeight="SemiBold" Background="FloralWhite" Foreground="black" BorderThickness="1"/>
             <Button x:Name="button_logo" Click="Button_CompLogo_click" Content="" HorizontalAlignment="Left" Margin="804,97,0,0" VerticalAlignment="Top" Width="83" Height="25" Background="#edc064"/>
             <Button Click="Browse_Template_Click" Content="Browse" HorizontalAlignment="Left" Margin="804,127,0,0" VerticalAlignment="Top" Width="83" Height="25" Foreground="Black" Background="#edc064" FontSize="12" FontWeight="Bold"/>
-            <ComboBox x:Name="ComboBox_Pagesize" HorizontalAlignment="Left" Text="--Select Output--" Margin="804,157,0,0" VerticalAlignment="Top" Width="227" Height="35" Foreground="White"/>
+            
+            <ComboBox Foreground="White" x:Name="ComboBox_Pagesize" HorizontalAlignment="Left" Text="--Select Output--" Margin="804,157,0,0" VerticalAlignment="Top" Width="72" Height="35" ItemsSource="{Binding pagesize}"/>
+            
+            
             <Button Click="Add_Company_Data_click" Background="#264653"  x:Name="button_save_compdata" Content="Save" HorizontalAlignment="Left" Margin="898,97,0,0" VerticalAlignment="Top" Width="61" Height="25"/>
             <Label x:Name="Label_Logo" Content="Browse" HorizontalAlignment="Left" Margin="820,96,0,0" VerticalAlignment="Top" Width="56" FontWeight="Bold"/>
 
         </Grid>
 
 
-        <Grid Grid.Row="3" Margin="0,5,5,0" Grid.ColumnSpan="2" />
+        <Grid Grid.Row="3" Margin="0,5,5,0" Grid.ColumnSpan="4" />
 
         <Grid Grid.Row="5" Background="Transparent" Grid.ColumnSpan="2"/>
-        <RadioButton Checked="RadioBtn1_English" Name="RadioBtn_English" Content="English" HorizontalAlignment="Left" Margin="650,-11,0,0" VerticalAlignment="Top" Width="108"/>
-        <RadioButton Checked="RadioBtn1_Indo" Name="RadioBtn_Bahasa" Content="Bahasa" HorizontalAlignment="Left" Margin="720,-11,0,0" VerticalAlignment="Top"/>
-        <Button Click="Button_Click_1" Content="ENTER" HorizontalAlignment="Left" Margin="126,87,0,-84" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_2" Content="ENTER" HorizontalAlignment="Left" Margin="302,87,0,-82" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_3" Content="ENTER" HorizontalAlignment="Left" Margin="492,87,0,-80" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_4" Content="ENTER" HorizontalAlignment="Left" Margin="668,87,0,-80" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_5" Content="ENTER" HorizontalAlignment="Left" Margin="0,87,0,-78" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black" Grid.Column="1"/>
-        <Button Click="Button_Click_6" Content="ENTER" HorizontalAlignment="Left" Margin="126,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_7" Content="ENTER" HorizontalAlignment="Left" Margin="302,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_8" Content="ENTER" HorizontalAlignment="Left" Margin="492,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_9" Content="ENTER" HorizontalAlignment="Left" Margin="669,279,0,-265" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
-        <Button Click="Button_Click_10" Content="ENTER" HorizontalAlignment="Left" Margin="0,279,0,-268" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black" Grid.Column="1"/>
-        <TextBox Width="0" Height="0" Name="TempObject_Textbox"></TextBox>
+        <RadioButton Checked="RadioBtn1_English" Name="RadioBtn_English" Content="English" HorizontalAlignment="Left" Margin="650,-11,0,0" VerticalAlignment="Top" Width="108" IsEnabled="False" Visibility="Hidden"/>
+        <RadioButton Checked="RadioBtn1_Indo" Name="RadioBtn_Bahasa" Content="Bahasa" HorizontalAlignment="Left" Margin="720,-11,0,0" VerticalAlignment="Top" IsEnabled="False" Visibility="Hidden"/>
+        <Button Click="Button_Click_1" Content="ENTER" HorizontalAlignment="Left" Margin="126,87,0,-71" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_2" Content="ENTER" HorizontalAlignment="Left" Margin="302,87,0,-71" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_3" Content="ENTER" HorizontalAlignment="Left" Margin="492,87,0,-71" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_4" Content="ENTER" HorizontalAlignment="Left" Margin="668,87,0,-71" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_5" Content="ENTER" HorizontalAlignment="Left" Margin="0,87,0,-71" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Button Click="Button_Click_6" Content="ENTER" HorizontalAlignment="Left" Margin="126,279,0,-263" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_7" Content="ENTER" HorizontalAlignment="Left" Margin="302,279,0,-263" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_8" Content="ENTER" HorizontalAlignment="Left" Margin="492,279,0,-263" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_9" Content="ENTER" HorizontalAlignment="Left" Margin="669,279,0,-263" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black"/>
+        <Button Click="Button_Click_10" Content="ENTER" HorizontalAlignment="Left" Margin="0,279,0,-263" Grid.Row="5" VerticalAlignment="Top" Width="74" Background="#edc064" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox Width="0" Height="0" Name="TempObject_Textbox" Margin="426,6,426,5"></TextBox>
+        <ComboBox Foreground="White" x:Name="combobox_language" Grid.Column="2" HorizontalAlignment="Left" Margin="60,-28,-9,0" VerticalAlignment="Top" Width="98" ItemsSource="{Binding language}" 
+                  SelectedIndex="0" SelectionChanged="combobox_language_SelectionChanged" Height="29" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

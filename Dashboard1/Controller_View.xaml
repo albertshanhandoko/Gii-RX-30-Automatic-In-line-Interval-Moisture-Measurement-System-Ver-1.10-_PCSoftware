@@ -120,7 +120,7 @@
 
                 <!-- Title -->
                 <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" >
-                    <TextBlock Name="textbox_SensorTitle"  Text="Sensor 1" TextAlignment="Center" FontSize="30" FontWeight="Bold" />
+                    <TextBlock Name="textbox_SensorTitle"  Text="Sensor 1" TextAlignment="Center" FontSize="30" FontWeight="Bold"  Margin="0,-8,0,0"/>
                 </Grid>
 
                 <!-- Historical Section -->
@@ -170,8 +170,8 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
-                            <RowDefinition Height="120"/>
-                            <RowDefinition Height="433"/>
+                            <RowDefinition Height="107"/>
+                            <RowDefinition Height="446"/>
 
                         </Grid.RowDefinitions>
 
@@ -185,7 +185,7 @@
 
                             <!--label -->
                             <StackPanel Orientation="Horizontal">
-                                <Label Width="90" Height="25" FontSize="11.5" FontWeight="Bold">Supplier Name:</Label>
+                                <Label Width="90" Height="25" FontSize="11." FontWeight="Bold">Supplier Name:</Label>
                                 <TextBox Padding="3,0,0,0" Name="txt_supplier" Width="145" 
                                          VerticalContentAlignment="Center" Text="" 
                                          FontSize="10" FontWeight="SemiBold" 
@@ -342,7 +342,7 @@
                             <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"  Grid.ColumnSpan="2">
                                 <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
 
-                                    <DataGrid Height="380" Width="540" 
+                                    <DataGrid Height="400" Width="540" 
                                     Name="Average_Grid" 
                                               VerticalAlignment="Top" Background="Transparent" 
                                               ColumnHeaderStyle="{StaticResource HeaderStyle}"
@@ -382,15 +382,15 @@
 
 
                             <!-- Final Average -->
-                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
-                                <Label Width="180" Height="30" FontWeight="SemiBold">Final Average Moisture (%)</Label>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                <Label Width="180" Height="30" FontWeight="SemiBold"  FontSize="14">Final Average Moisture (%)</Label>
                                 <Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" 
                                         Background="FloralWhite" 
                                         Height="25" Margin="0,3,0,5">
                                     <Border BorderThickness="0 0 1.2 1.2" CornerRadius="0.5" BorderBrush="White" Padding="0.5">
                                         <TextBox Width="135" Text="" IsEnabled="False" Height="30" Name="txt_FinalAverage" 
                                                  Background="Transparent" VerticalAlignment="Center" 
-                                                 TextAlignment="Center" ></TextBox>
+                                                 TextAlignment="Center" FontSize="14"  ></TextBox>
                                     </Border>
                                 </Border>
 

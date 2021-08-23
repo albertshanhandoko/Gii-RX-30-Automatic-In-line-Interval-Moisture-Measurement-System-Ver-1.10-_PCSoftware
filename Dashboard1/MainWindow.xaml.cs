@@ -37,6 +37,9 @@ namespace Dashboard1
         static string application_name = ConfigurationManager.AppSettings["application_name"] ?? "Not Found";
         static string url_Image_Logo = Folder_Path + "dataconfig/Logo.png";
         static string RadioButtonDefault = ConfigurationManager.AppSettings["RadioBtn_Default"] ?? "Not Found";
+        public string[] language { get; set; }
+        public string[] pagesize { get; set; }
+
         //private USBClass USBPort;
         public MainWindow()
         {
@@ -47,20 +50,15 @@ namespace Dashboard1
             //check_removeable(); // ini buat cek usb
             //check_model();
 
+            language = new string[] { "English", "Bahasa" };
+            pagesize = new string[] { "A4", "A5" };
+            DataContext = this;
 
-            Consumo consumo = new Consumo();
-            DataContext = new ConsumoViewModel(consumo);
+            //Consumo consumo = new Consumo();
+            //DataContext = new ConsumoViewModel(consumo);
 
             //txt_applicationName.Text = application_name;
-            if (RadioButtonDefault == "0")
-            {
-                RadioBtn_English.IsChecked = true;
-            }
 
-            else
-            {
-                RadioBtn_Bahasa.IsChecked = true;
-            }
 
 
         }
@@ -105,9 +103,9 @@ namespace Dashboard1
             var portNames = SerialPort.GetPortNames();
 
             // A4 and A5 page size
-            ComboBox_Pagesize.Items.Clear();
+            //ComboBox_Pagesize.Items.Clear();
 
-          
+
 
             BitmapImage src = new BitmapImage(new Uri("pack://application:,,,/Resources/Global_Instrument_Logo.jpeg", UriKind.Absolute));
             //imgDynamic.Source = src;
@@ -127,15 +125,15 @@ namespace Dashboard1
             }
             //ComboBox_Pagesize.Items.Add("A4");
             //ComboBox_Pagesize.Items.Add("A5");
-            ComboBox_Pagesize.SelectedValuePath = "Key";
-            ComboBox_Pagesize.DisplayMemberPath = "Value";
+            //ComboBox_Pagesize.SelectedValuePath = "Key";
+            //ComboBox_Pagesize.DisplayMemberPath = "Value";
             //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(0, "A4 Portrait"));
             //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(1, "2 copies of report in PDF (A4)"));
             //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(2, "\"9.5\" x \"11\" (cnt form paper)"));
             //ComboBox_Pagesize.Items.Add(new KeyValuePair<int, string>(3, "\"9.5\" x \"5.5\" (cnt form paper)"));
-            
-            ComboBox_Pagesize.Items.Add("A4");
-            ComboBox_Pagesize.Items.Add("A5");
+
+            //ComboBox_Pagesize.Items.Add("A4");
+            //ComboBox_Pagesize.Items.Add("A5");
             /*
             ComboBox_Pagesize.Items.Add("A4 Portrait Cnt Paper");
             ComboBox_Pagesize.Items.Add("A5 Landscape Cnt Paper");
@@ -240,13 +238,13 @@ namespace Dashboard1
         }
         private void RadioBtn1_English(object sender, RoutedEventArgs e)
         {
-            guide_title.Text = "How to use this application:";
-            guide_step1.Text = "1. After connecting the USB, go to ‘Device Manager’ and look under ‘Ports (COM & LPT)’ to check COM Port number. ";
-            guide_step2.Text = "2. Select the COM Port number for each SENSOR accordingly and select the Baud rate to be 600.";
-            guide_step3.Text = "3. Press 'START' to enter SENSOR page before you start measuring with the in-line moisture tester.";
-            guide_step4.Text = "4. After each measurement is finished, close the SENSOR window and press ‘START’ again to open new window for next measurement. ";
-            guide_step5.Text = "5. Please contact indo_sales@globalinstrumentsg.com for any issues.";
-            guide_step6.Text = "* Click refresh button, in case Serial Port can't be found.";
+            guide_step1.Text = "1. Refer to page __ of instruction manual to set up PC Software IP address after installation. This only needs to be done once.";
+            guide_step2.Text = "2. Always start this software before measurement begins.";
+            guide_step3.Text = "3. Enter your company name, address and company logo for PDF report letterhead.";
+            guide_step4.Text = "4. Select Template 'excel_template.xls'";
+            guide_step5.Text = "5. Choose preferred PDF report output";
+            guide_step6.Text = "6. Click 'ENTER' on the corresponding Sensor number that you are using to enter Data Logging page. ";
+            guide_step7.Text = "7. Press 'START' on controller to begin measurement and data logging.";
 
         }
 
@@ -563,7 +561,7 @@ namespace Dashboard1
                         MessageBox.Show("Error 001 - Connection to controller failed", application_name);
                     }
 
-                    
+
                 }
                 catch (Exception error)//(Exception e)
                 {
@@ -619,6 +617,30 @@ namespace Dashboard1
             Open_Controller_Page("192.168.0.10");
         }
 
+        private void combobox_language_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (combobox_language.SelectedValue.ToString() == "English")
+            {
+                guide_step1.Text = "1. Refer to page __ of instruction manual to set up PC Software IP address after installation. This only needs to be done once.";
+                guide_step2.Text = "2. Always start this software before measurement begins.";
+                guide_step3.Text = "3. Enter your company name, address and company logo for PDF report letterhead.";
+                guide_step4.Text = "4. Select Template 'excel_template.xls'";
+                guide_step5.Text = "5. Choose preferred PDF report output";
+                guide_step6.Text = "6. Click 'ENTER' on the corresponding Sensor number that you are using to enter Data Logging page. ";
+                guide_step7.Text = "7. Press 'START' on controller to begin measurement and data logging.";
+            }
+
+            else if (combobox_language.SelectedValue.ToString() == "Bahasa")
+            {
+                guide_title.Text = "Instruksi:";
+                guide_step1.Text = "1. Setelah menghubungkan USB, pergi ke 'Device Manager' dan lihat di bawah 'Ports (COM & LPT)' untuk memeriksa nomor COM Port.";
+                guide_step2.Text = "2. Pilih nomor COM Port untuk setiap SENSOR yang sesuai dan pilih Baud rate menjadi 600.";
+                guide_step3.Text = "3. Tekan 'START' untuk masuk ke halaman SENSOR sebelum Anda mulai mengukur dengan penguji kadar air in-line.";
+                guide_step4.Text = "4. Setelah setiap pengukuran selesai, tutup jendela SENSOR dan tekan 'START' lagi untuk membuka jendela baru untuk pengukuran berikutnya.";
+                guide_step5.Text = "5. Silakan hubungi indo_sales@globalinstrumentsg.com untuk masalah apa pun.";
+                guide_step6.Text = "* Tekan tombol refresh, apabila Serial Port tidak ditemukan.";
+            }
+        }
     }
 
 
