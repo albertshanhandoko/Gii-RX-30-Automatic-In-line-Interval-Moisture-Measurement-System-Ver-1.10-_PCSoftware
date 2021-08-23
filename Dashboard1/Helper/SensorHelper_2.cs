@@ -4301,7 +4301,7 @@ namespace Dashboard1.Helper
                     column_date = "L" + ex_row.ToString();
                     sheet.Range[column_Pcs].Value = batch_data.List_Average_Result[ex_row - 17].No_Of_Peaces.ToString();
                     sheet.Range[column_MeasureAvg].Value = batch_data.List_Average_Result[ex_row - 17].measure_result_cls.ToString();
-                    sheet.Range[column_date].Value = batch_data.List_Average_Result[ex_row - 17].created_on_cls.ToString();
+                    sheet.Range[column_date].Text = batch_data.List_Average_Result[ex_row - 17].created_on_cls.ToString();
                 }
             }
             catch (Exception ex)
@@ -4322,7 +4322,7 @@ namespace Dashboard1.Helper
                     column_date = "V" + ex_row.ToString();
                     sheet.Range[column_Pcs].Value = batch_data.List_Average_Result[ex_row].No_Of_Peaces.ToString();
                     sheet.Range[column_MeasureAvg].Value = batch_data.List_Average_Result[ex_row].measure_result_cls.ToString();
-                    sheet.Range[column_date].Value = batch_data.List_Average_Result[ex_row].created_on_cls.ToString();
+                    sheet.Range[column_date].Text = batch_data.List_Average_Result[ex_row].created_on_cls.ToString();
                 }
             }
             catch (Exception ex)

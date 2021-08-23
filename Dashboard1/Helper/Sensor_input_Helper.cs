@@ -338,8 +338,8 @@ namespace Dashboard1.Helper
                     {
                         query_batch.batch_measure_ID_cls = (Convert.ToInt32(reader["Batch_Measure_ID"]));
                         query_batch.ipaddress_cls = reader["IPADDRESS"].ToString();
-                        query_batch.start_date_cls = DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss");
-                        query_batch.finish_date_cls = (Convert.ToDateTime(reader["Start_Date"]).ToString("yy/MM/dd HH:mm:ss"));
+                        query_batch.start_date_cls = DateTime.Now.ToString("dd/MM/yy") + "   " + DateTime.Now.ToString("HH:mm:ss");
+                        query_batch.finish_date_cls = (Convert.ToDateTime(reader["Start_Date"]).ToString("dd/MM/yy HH:mm:ss"));
                         query_batch.product_cls = reader["Product"].ToString();
                         query_batch.total_interval_cls = (Convert.ToInt32(reader["Total_Interval"]));
                         query_batch.time_interval_cls = reader["Time_INterval"].ToString();
@@ -361,7 +361,7 @@ namespace Dashboard1.Helper
                             result_average_temp.measure_result_cls = float.Parse(reader["measure_result"].ToString());
                             result_average_temp.No_Of_Peaces = (Convert.ToInt32(reader["jumlah_measure"]));
                             //result_average_temp.No_Of_Peaces = query_batch.List_Measure_Result.Count();
-                            result_average_temp.created_on_cls = DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss");
+                            result_average_temp.created_on_cls = DateTime.Now.ToString("dd/MM/yy") + "   " + DateTime.Now.ToString("HH:mm:ss");
                             List_Average_Results.Add(result_average_temp);
                         }
                     }
