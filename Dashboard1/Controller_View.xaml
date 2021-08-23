@@ -394,7 +394,7 @@
                                     </Border>
                                 </Border>
 
-                                <Button Width="50" Height="25" Margin="35,0,0,5" Padding="3" 
+                                <Button Width="0" Height="25" Margin="35,0,0,5" Padding="3" 
                                         HorizontalAlignment="Left" 
                                  FontSize="14" Background="#264653"  
                                 Foreground="AntiqueWhite" FontWeight="Medium"  FontFamily="calibri" 
