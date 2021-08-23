@@ -261,6 +261,75 @@ namespace Dashboard1.Helper
             return data_Measures;
         }
 
+        public static List<Sql_Measure_Result> Test_ListSQLMeasureResult()
+        {
+            List<Sql_Measure_Result> data_Measures = new List<Sql_Measure_Result>
+            {
+                //new Data_Measure {Id = 1, Measures = 241, Created_date = DateTime.Now},
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+                new Sql_Measure_Result (1,1,11,12, DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss"), 1),
+
+
+                //new Data_Measure (0, "245", DateTime.Now)
+            };
+            return data_Measures;
+        }
+
+
+
+
         public static void writeText(PdfContentByte cb, string Text, int X, int Y, BaseFont font, int Size)
         {
             cb.SetFontAndSize(font, Size);

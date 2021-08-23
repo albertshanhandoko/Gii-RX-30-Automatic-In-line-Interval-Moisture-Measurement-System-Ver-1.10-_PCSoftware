@@ -132,7 +132,7 @@
                                    TextDecorations="Underline"
                                    VerticalAlignment="Top" Margin="5,0,0,0" FontSize="18" FontWeight="SemiBold"/>
 
-                        <DataGrid Height="212" Width="520" 
+                        <DataGrid Height="200" Width="520" 
                              x:Name="HistoryGrid1" VerticalAlignment="Top" Background="Transparent"
                                    ColumnHeaderStyle="{StaticResource PDFHeaderStyle}" SelectionChanged="HistoryGrid1_SelectionChanged"                                 
                                   >
@@ -169,9 +169,9 @@
                 <Grid Grid.Row="1" Grid.Column="1" Background="Transparent" Grid.RowSpan="2">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="160"/>
-                            <RowDefinition Height="360"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition Height="433"/>
 
                         </Grid.RowDefinitions>
 
@@ -342,7 +342,7 @@
                             <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"  Grid.ColumnSpan="2">
                                 <StackPanel Margin="0,0,0,0" Orientation="Vertical" >
 
-                                    <DataGrid Height="330" Width="540" 
+                                    <DataGrid Height="380" Width="540" 
                                     Name="Average_Grid" 
                                               VerticalAlignment="Top" Background="Transparent" 
                                               ColumnHeaderStyle="{StaticResource HeaderStyle}"
@@ -382,7 +382,7 @@
 
 
                             <!-- Final Average -->
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
                                 <Label Width="180" Height="30" FontWeight="SemiBold">Final Average Moisture (%)</Label>
                                 <Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" 
                                         Background="FloralWhite" 
@@ -394,7 +394,7 @@
                                     </Border>
                                 </Border>
 
-                                <Button Width="0" Height="25" Margin="35,0,0,5" Padding="3" 
+                                <Button Width="50" Height="25" Margin="35,0,0,5" Padding="3" 
                                         HorizontalAlignment="Left" 
                                  FontSize="14" Background="#264653"  
                                 Foreground="AntiqueWhite" FontWeight="Medium"  FontFamily="calibri" 

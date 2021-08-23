@@ -353,10 +353,12 @@ namespace Dashboard1
             {
                 MessageBox.Show("Please enter Printed By", application_name);
             }
+            /*
             else if (List_Measure_Average.Count() != Sensor_Batch.total_interval_cls)
             {
                 MessageBox.Show("Measurement Not Finish", application_name);
             }
+            */
             else
             {
                 try
@@ -367,6 +369,8 @@ namespace Dashboard1
                     bool isPremature = false;
                     int ExpectedPieces = Sensor_Batch.number_per_interval_cls * Sensor_Batch.total_interval_cls;
                     int ActualPieces = Sensor_Batch.List_Measure_Result.Count();
+
+                    Sensor_Batch.List_Average_Result = SensorHelper_2.Test_ListSQLMeasureResult();
                     if (ActualPieces < ExpectedPieces)
                     {
                         isPremature = true;

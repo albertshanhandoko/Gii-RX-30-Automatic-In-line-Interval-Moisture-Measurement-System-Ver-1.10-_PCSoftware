@@ -321,14 +321,6 @@ namespace Dashboard1.Constant
 
     public enum Error_Sensor_PC_Detail
     {
-        [Description("Error 020_1")]
-        error1000, // 1000 ga mungkin penilaian 
-        [Description("Error 022")]
-        error1200, // 1200 ga mungkin nilai
-        [Description("Error 024")]
-        error1400, // 1400 ga mungkin nilai
-        [Description("Error 021_1")]
-        error1600, // 1600
 
         // found during measurement
         [Description("Error 020_2")]
@@ -337,23 +329,25 @@ namespace Dashboard1.Constant
         error021, // STX 070 ETX CheckSUM CR
 
         // 5 minutes
-        [Description("In automatic/manual measurement, there was no grain feed for more than five minutes.")]
+        [Description("There is no grain feed to sensor for more than five minutes.")]
         error011, // STX 020 ETX CheckSUM CR
         // finish found during measurement
+        [Description("Abnormal data.")]
+        error030,
+        [Description("Turn off the power of the sensor and the controller, and clean the measurement roller of the sensor. \n " +
+            "If problem is not solved, it means motor/gear/internal circuits are defective. ")]
+        error000,
 
+        /*
         // Check Command
-        [Description("Error 101")]
-        error00091,
-        [Description("Error 102")]
-        error00092,
-        [Description("Error 103")]
-        error00093,
-        [Description("Error 104")]
+        [Description("Abnormal Sensor circuits 1")]
+        error000101,
+        [Description("Abnormal Sensor circuits 2")]
+        error000102,
+        [Description("Abnormal Sensor circuits 3")]
+        error000103,
+        [Description("Motor lock")]
         error00094,
-    };
-
-    public enum Error_Sensor_PC_Fixing
-    {
         [Description("Error 020_1")]
         error1000, // 1000 ga mungkin penilaian 
         [Description("Error 022")]
@@ -362,26 +356,56 @@ namespace Dashboard1.Constant
         error1400, // 1400 ga mungkin nilai
         [Description("Error 021_1")]
         error1600, // 1600
+        */
 
-        [Description("Error 020_2")]
+    };
+
+    public enum Error_Sensor_PC_Fixing
+    {
+
+        [Description("Turn off the power of the sensor and the controller and turn them back on again to restart. \n" +
+            "Use the device within the range of the operating temperatures of the temperature sensor (–20ºC to 70ºC).")]
         error020, // STX 020 ETX CheckSUM CR
-        [Description("Error 021_2")]
+
+        [Description("Turn off the power of the sensor and the controller and turn them back on again to restart. \n" +
+            "Use the device within the range of the operating temperatures of the temperature sensor (–20ºC to 70ºC).")]
         error021, // STX 070 ETX CheckSUM CR
 
         // 5 minutes
-        [Description("Reset with the [STOP] key. Clean the grain intake on PU-359")]
+        [Description("Turn off the power of the sensor and the controller, and clean the grain intake on sensor \n" +
+    "If grain intake on sensor is clean and problem is not solved, it means that there are no grains in elevator bucket or grain flowpipe " +
+    "for more than 5 minutes.  ")]
         error011, // STX 020 ETX CheckSUM CR
 
+        [Description("Restart sensor and controller by turning them off and then on again.")]
+        error030,
+        [Description("Turn off the power of the sensor and the controller, and clean the measurement roller of the sensor. \n " +
+            "If problem is not solved, it means motor/gear/internal circuits are defective. ")]
+        error000,
 
+        /*
+        [Description("Error 020_1")]
+        error1000, // 1000 ga mungkin penilaian 
+        [Description("Error 022")]
+        error1200, // 1200 ga mungkin nilai
+        [Description("Error 024")]
+        error1400, // 1400 ga mungkin nilai
+        [Description("Error 021_1")]
+        error1600, // 1600
         // Check Command
-        [Description("Error 101")]
+        [Description("Turn off the power of the sensor and the controller, and clean the measurement roller of the sensor. \n "  + 
+            "If problem is not solved, it means sensor internal circuits are defective. ")]
         error00091,
-        [Description("Error 102")]
+        [Description("Turn off the power of the sensor and the controller, and clean the measurement roller of the sensor. \n " +
+            "If problem is not solved, it means sensor internal circuits are defective. ")]
         error00092,
-        [Description("Error 103")]
+        [Description("Turn off the power of the sensor and the controller, and clean the measurement roller of the sensor. \n " +
+            "If problem is not solved, it means sensor internal circuits are defective. ")]
         error00093,
-        [Description("Error 104")]
+        [Description("Turn off the power of the sensor and the controller, and clean the measurement roller of the sensor. \n " +
+            "If problem is not solved, it means motor/gear/internal circuits are defective. ")]
         error00094,
+        */
     };
 
 
