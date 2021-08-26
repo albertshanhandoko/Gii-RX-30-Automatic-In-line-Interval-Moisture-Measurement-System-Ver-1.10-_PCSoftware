@@ -113,7 +113,22 @@ namespace Dashboard1
                 lastbatchid = Current_Sensor_Batch.batch_measure_ID_cls;
                 txt_date.Text = Current_Sensor_Batch.start_date_cls;
                 //txt_date.Text = Sensor_Batch.start_date_cls;
-                txt_application.Text = Current_Sensor_Batch.product_cls;
+                if (Current_Sensor_Batch.product_cls == "Brown Rice")
+                {
+                    txt_application.Text = "Corn High";
+                }
+                else if (Current_Sensor_Batch.product_cls == "Wheat")
+                {
+                    txt_application.Text = "Corn Medium";
+                }
+                else if (Current_Sensor_Batch.product_cls == "Corn")
+                {
+                    txt_application.Text = "Corn Low";
+                }
+                else
+                {
+                    txt_application.Text = Current_Sensor_Batch.product_cls;
+                }
                 txt_TotInterval.Text = Current_Sensor_Batch.total_interval_cls.ToString();
                 txt_TotPCS.Text = (Current_Sensor_Batch.total_interval_cls * Current_Sensor_Batch.number_per_interval_cls).ToString();
                 txt_Temperature.Text = Current_Sensor_Batch.temperature_cls;
@@ -189,7 +204,22 @@ namespace Dashboard1
                 {
                     //txt_date.Text = DateTime.Now.ToString();
                     txt_date.Text = Sensor_Batch.start_date_cls;
-                    txt_application.Text = Sensor_Batch.product_cls;
+                    if (Sensor_Batch.product_cls == "Brown Rice")
+                    {
+                        txt_application.Text = "Corn High";
+                    }
+                    else if (Sensor_Batch.product_cls == "Wheat")
+                    {
+                        txt_application.Text = "Corn Medium";
+                    }
+                    else if (Sensor_Batch.product_cls == "Corn")
+                    {
+                        txt_application.Text = "Corn Low";
+                    }
+                    else
+                    {
+                        txt_application.Text = Sensor_Batch.product_cls;
+                    }
                     txt_TotInterval.Text = Sensor_Batch.total_interval_cls.ToString();
                     txt_TotPCS.Text = (Sensor_Batch.total_interval_cls * Sensor_Batch.number_per_interval_cls).ToString();
                     txt_Temperature.Text = Sensor_Batch.temperature_cls;

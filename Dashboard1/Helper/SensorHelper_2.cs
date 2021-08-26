@@ -3962,8 +3962,22 @@ namespace Dashboard1.Helper
             //sheet.Range["C7"].Text = DateTime.Now.ToString("yy/MM/dd HH:mm:ss");
 
             sheet.Range["C8"].Text = printedby;
-
-            sheet.Range["L6"].Text = batch_data.product_cls;
+            if (batch_data.product_cls == "Brown Rice")
+            {
+                sheet.Range["L6"].Text = "Corn High";
+            }
+            else if (batch_data.product_cls == "Wheat")
+            {
+                sheet.Range["L6"].Text = "Corn Medium";
+            }
+            else if (batch_data.product_cls == "Corn")
+            {
+                sheet.Range["L6"].Text = "Corn Low";
+            }
+            else
+            {
+                sheet.Range["L6"].Text = batch_data.product_cls;
+            }
             sheet.Range["L7"].Text = batch_data.temperature_cls + "°C";
             //sheet.Range["L8"].Value = batch_data.ipaddress_cls;
 
