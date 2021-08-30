@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Dashboard1"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
-        Title="Gii MX-01 Measurement Systemz" 
+        Title="Gii RX-30 Automatic In-line Interval Moisture Measurement System (Ver 1.10)" 
         mc:Ignorable="d" Height="670" Width="1124" ResizeMode="CanMinimize" 
         WindowStartupLocation="CenterScreen">
     <Window.Background>
@@ -100,7 +100,7 @@
             <ColumnDefinition Width="852*"/>
             <ColumnDefinition Width="57*"/>
             <ColumnDefinition Width="122*"/>
-            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="27"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <!-- Title Start -->
@@ -162,7 +162,7 @@
                         <TextBlock Text="* Click refresh button, in case Serial Port can't be found."
                             x:Name="guide_step7" HorizontalAlignment="Left" VerticalAlignment="Top"
 	                           FontFamily="Champagne &amp;Limousines" FontSize="11" Margin="0,0,0,3"  Foreground="White"/>
-                        
+
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal"/>
@@ -189,10 +189,10 @@
             <TextBox x:Name="txt_compaddr" HorizontalAlignment="Left" Height="24" Margin="803,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="245"  Padding="3,0,0,0" VerticalContentAlignment="Center" Text="" FontSize="10" FontWeight="SemiBold" Background="FloralWhite" Foreground="black" BorderThickness="1"/>
             <Button x:Name="button_logo" Click="Button_CompLogo_click" Content="" HorizontalAlignment="Left" Margin="804,97,0,0" VerticalAlignment="Top" Width="83" Height="25" Background="#edc064"/>
             <Button Click="Browse_Template_Click" Content="Browse" HorizontalAlignment="Left" Margin="804,127,0,0" VerticalAlignment="Top" Width="83" Height="25" Foreground="Black" Background="#edc064" FontSize="12" FontWeight="Bold"/>
-            
+
             <ComboBox Foreground="White" x:Name="ComboBox_Pagesize" HorizontalAlignment="Left" Text="--Select Output--" Margin="804,157,0,0" VerticalAlignment="Top" Width="72" Height="35" ItemsSource="{Binding pagesize}"/>
-            
-            
+
+
             <Button Click="Add_Company_Data_click" Background="#264653"  x:Name="button_save_compdata" Content="Save" HorizontalAlignment="Left" Margin="898,97,0,0" VerticalAlignment="Top" Width="61" Height="25"/>
             <Label x:Name="Label_Logo" Content="Browse" HorizontalAlignment="Left" Margin="820,96,0,0" VerticalAlignment="Top" Width="56" FontWeight="Bold"/>
 

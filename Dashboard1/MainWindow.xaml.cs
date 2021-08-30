@@ -47,8 +47,8 @@ namespace Dashboard1
 
             InitializeComponent();
             Data_Initialize();
-            //check_removeable(); // ini buat cek usb
-            //check_model();
+            check_removeable(); // ini buat cek usb
+            check_model();
 
             language = new string[] { "English", "Bahasa" };
             pagesize = new string[] { "A4", "A5" };

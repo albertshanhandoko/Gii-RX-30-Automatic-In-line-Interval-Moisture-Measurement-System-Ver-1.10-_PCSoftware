@@ -4250,7 +4250,22 @@ namespace Dashboard1.Helper
             sheet.Range["D6"].Text = label;
             sheet.Range["D7"].Text = batch_data.start_date_cls;
             sheet.Range["D8"].Text = printedby;
-            sheet.Range["N6"].Text = batch_data.product_cls;
+            if (batch_data.product_cls == "Brown Rice")
+            {
+                sheet.Range["N6"].Text = "Corn High";
+            }
+            else if (batch_data.product_cls == "Wheat")
+            {
+                sheet.Range["N6"].Text = "Corn Medium";
+            }
+            else if (batch_data.product_cls == "Corn")
+            {
+                sheet.Range["N6"].Text = "Corn Low";
+            }
+            else
+            {
+                sheet.Range["N6"].Text = batch_data.product_cls;
+            }
             sheet.Range["N7"].Text = batch_data.temperature_cls + "°C";
             sheet.Range["N8"].Text = batch_data.ipaddress_cls.Substring(batch_data.ipaddress_cls.Length - 1);
             //Substring(input.Length - 3)
